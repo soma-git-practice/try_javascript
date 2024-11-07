@@ -24,3 +24,42 @@ rubyでも使えるのかな？
 https://jsprimer.net/basic/class/
 
 コミットなし
+
+# 24/11/07 夜
+javascriptを学んでいるとあれ？rubyってどうやって書くんだっけ？ってなり恐怖だ。
+
+vscodeでdebugする方法を知った。
+
+https://ics.media/entry/11356/
+
+ショートカットキーに追加した。
+
+javascriptのファイルの先頭で `console.clear();` 指定おくと追いやすい。
+
+| タイトル | キー |
+| --- | --- |
+| デバッグの開始 | ⌘t |
+| デバッグの再起動 | ⌘r |
+
+Rubyの癖でついつい変数・定数宣言を書き忘れてしまい、エラーになりがちだ。
+Uncaught ReferenceError ReferenceError: ~~ is not defined.
+
+-----
+
+ここでincrementのthisがundefinedになることを理解できない。
+thisを理解しないとわからない気がする。
+一旦飛ばしてまた戻ってこよう。
+
+クラスフィールドが入門者向けかと言われるとそうではないのではないだろうか？
+まずはできるところから進めていくぞ！
+
+https://jsprimer.net/basic/class/#this-in-class-fields
+
+----
+
+クラスメソッドのことをJavaScriptでは静的メソッドというみたいだ。
+
+javascript_primerより、
+独習javascriptの方が初心者寄りな気がするからまずそっち先にやってから出直すことにした。
+
+独習javascript触りつつ、自分でアレンジしたコードを書い勉強するとより身につくかもだから試してみる。
