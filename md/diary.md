@@ -20,10 +20,12 @@ JavaScriptのnull合体演算子を試した。
 RubyとJavaScriptでは真になるオペランド、
 偽になるオペランドに違いがあった。
 
+#### falsyな値
 Ruby | JavaScript
 -- | --
-falseとnilは偽。それ以外は真。 | 途中
-途中 | 途中 
+`false`, `nil` | `null`, `undefined`, `false`, `NaN`, `0`, `-0`, `0n`, `""`, `document.all`
+https://docs.ruby-lang.org/ja/latest/class/FalseClass.html | https://developer.mozilla.org/ja/docs/Glossary/Falsy
+
 
 # 24/11/08
 「null合体演算子」と「オプショナルチェイニング」という言葉が登場した。
