@@ -1,5 +1,29 @@
-# 24/11/08
+# 24/11/09
+JavaScriptのnull合体演算子を試した。
 
+RubyとJavaScriptでは真になるオペランド、
+偽になるオペランドに違いがあった。
+
+Ruby | JavaScript
+-- | --
+falseとnilは偽。それ以外は真。 | aaa 
+o | x 
+
+
+このリポジトリを始めてから、
+markdown書くようになった。
+githubと形式が違うことがストレスに感じgithub風のレイアウトにする拡張機能を見つけた。
+
+https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles
+
+
+markdownを書くウィンドウと作業するウィンドウを分けたいと思った。
+vscodeの設定でたまに見かけるワークスペースってやつがそれじゃない？？と思って調べたら合ってた。
+これ気に入った。
+
+https://zenn.dev/chillnn_tech/articles/vscode-window-native-tabs
+
+# 24/11/08
 「null合体演算子」と「オプショナルチェイニング」という言葉が登場した。
 聞き馴染みがない。
 まだ覚えていないから頑張るぞ！
