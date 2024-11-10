@@ -27,6 +27,60 @@ Ruby | JavaScript
 https://docs.ruby-lang.org/ja/latest/class/FalseClass.html | https://developer.mozilla.org/ja/docs/Glossary/Falsy
 
 
+#### null合体演算子
+null合体演算子は、左のオペランドがnullかundefinedの場合右のオペランドを返す。
+左のオペランドがnullまたはundefinedの場合左のオペランドを返す。
+JavaScriptではRubyのメモ化をnull合体演算子でやるみたいだね。
+
+```javascript
+const value = null ?? 'ヤッホー';
+console.log(value);
+// #=> ヤッホー
+
+const value2 = 'ヤッホ-' ?? null;
+console.log(value2);
+// #=> ヤッホー
+```
+
+#### オプショナルチェイニング
+レシーバがnullまたはundefinedの場合、
+メソッドは呼ばずに、undefinedを戻す。
+Rubyのぼっち演算子と考えればよさそ。
+
+```javascript
+const frend = { tarou: { age: 12 }};
+console.log(frend.tarou.age);
+// => 12
+
+console.log(frend.kaoru?.age);
+// => undefined
+
+console.log(frend.kaoru.age);
+// Uncaught TypeError: Cannot read properties of undefined (reading 'age')
+```
+
+#### 列挙可能性
+列挙可能性という言葉が出てきた。
+オブジェクトはプロパティディスクリプタというプロパティで列挙可能性の設定を保持している。
+プロパティディスクリプタは普段隠されているが、以下を呼ぶと確認ができるようだ。
+
+```javascript
+Reflect.getOwnPropertyDescriptor(オブジェクト, 'プロパティ')
+```
+
+#### ラベル
+javascriptはブロックに名前をつけることができるようだ。
+ループの内側から抜けるループを選択できるみたい！
+
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/label
+
+#### 戻り値の特徴
+returnを関数内にない場合、undefinedが帰る。
+
+#### 関数って何？
+関数は実行可能なオブジェクトリテラル。
+
+
 # 24/11/08
 「null合体演算子」と「オプショナルチェイニング」という言葉が登場した。
 聞き馴染みがない。
