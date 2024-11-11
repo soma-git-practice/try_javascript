@@ -8,3 +8,6 @@ https://docs.ruby-lang.org/ja/latest/class/FalseClass.html | https://developer.m
 
 * メソッドとして実行した場合は、そのメソッドを持つオブジェクトがthisの値になる。
 * 関数として実行した場合は、グローバルオブジェクト（window）がthisの値になる。
+
+# アロー関数のthis
+アロー関数はthisを持たない。アロー関数内でthisを使うと、親スコープの（関数コンテキスト or グローバルスコープ)のthisが使われる。
