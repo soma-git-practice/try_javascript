@@ -3,6 +3,9 @@
 アロー関数はthisを持たない。アロー関数が実行された時には親スコープのthisが使われる。
 
 thisを指定することもできるようだ。今日は電卓進める。
+NodeListをループしたい時にメソッドがforEachしか思いつかなかった。しかもforEachってなんだっけ？ってなった。for...inとfor...ofも分からん。5章制御構文思い出すぞ！ 配列はfor...ofを使うと良いとコラムで書いてあるからfor...ofを使ってみることに。
+
+https://github.com/soma-git-practice/dentaku/commit/66e160eb8973f0b681dcaf8ea2bdb7b00f25d4ae
 
 # 24/11/11 夜
 グローバルコンテキストが作成される -> 関数コンテキストが作成される。
