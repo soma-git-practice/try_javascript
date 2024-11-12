@@ -11,3 +11,12 @@ https://docs.ruby-lang.org/ja/latest/class/FalseClass.html | https://developer.m
 
 # アロー関数のthis
 アロー関数はthisを持たない。アロー関数内でthisを使うと、親スコープの（関数コンテキスト or グローバルスコープ)のthisが使われる。
+
+# superメソッド
+
+RubyもJavaScriptもスーパークラスのオーバーライドするメソッドを呼び出すメソッドだが違いがあった。
+
+Ruby | JavaScript
+-- | --
+initializeメソッドはsuperメソッドが任意。 | constructorメソッドはsuperメソッドがthisが呼び出される前に必須。（ReferenceErrorになる）
+\- | [MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/constructor#%E8%A7%A3%E8%AA%AC)
