@@ -20,3 +20,55 @@ Ruby | JavaScript
 -- | --
 initializeメソッドはsuperメソッドが任意。 | constructorメソッドはsuperメソッドがthisが呼び出される前に必須。（ReferenceErrorになる）
 \- | [MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/constructor#%E8%A7%A3%E8%AA%AC)
+
+# プライベートプロパティ
+JavaScriptは、プロパティとメソッドの頭文字にシャープがあるとプライベートになる。
+プライベートなプロパティはconstructor含めメソッド内で宣言することはできない。
+Rubyはプライベートなメソッドはあるがプライベートなプロパティという考え方はないんではないだろうか？
+
+#### ruby
+```ruby
+class Hoge
+  private
+
+  def say
+    puts 'ヤッホー'
+  end
+end
+```
+
+#### JavaScript
+```javascript
+class Hoge {
+  #hoge(){
+    console.log('ヤッホー');
+  }
+}
+```
+
+# ゲッター
+Rubyはゲッターを明示的に記述しないとインスタンス変数の値を取得することはできないが、
+JavaScriptは明示的に記述しなくてもプロパティを取得することはできる。
+インスタンス変数とプロパティは似てるけど別物なんだな。
+
+JavaScript
+```JavaScript
+class User { constructor() { this.name = '太郎' } }
+const obj = new User;
+console.log(obj.name);
+
+// => 太郎
+```
+
+Ruby
+```ruby
+class Hoge
+  def initialize
+    @val = '太郎'
+  end
+end
+
+j = Hoge.new;
+p j.val
+# => undefined method `val'
+```
