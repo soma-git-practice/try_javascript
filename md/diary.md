@@ -1,3 +1,52 @@
+# 24//11/16
+JavaScriptのクラスはES6で追加された。
+それまではプロトタイプという仕組みを利用していた。
+JavaScriptはプロトタイプベース言語と言われている。
+
+元々、JavaScriptのオブジェクトはコンストラクタ関数とnew演算子で作成していた。
+コンストラクタ関数はコンストラクタと同じ働きをする。
+
+関数オブジェクトはプロトタイプ（protoptype）をプロパティとして保持している。
+プロトタイプはインスタンス化に関連がある。
+
+prototypeオブジェクトにはメソッドを格納する。
+prototypeプロパティの値（オブジェクト）に登録された関数はインスタンスから実行可能になる。
+
+prototypeプロパティはコンストラクタ関数が宣言された後に設定される。
+
+▼ そう思った理由。
+```javascript
+function Person(arg){
+  this.name = arg;
+  prototype.hello = function(){  
+    console.log('hello')
+  }
+}
+// => prototype is not defined.
+
+function Person(arg){
+  this.name = arg;
+  console.log(this.prototype);
+}
+// => undefined
+
+function Person(arg) {
+  this.name = arg;
+}
+
+console.log(Person.prototype);
+// => {}
+```
+
+prototypeはインスタンス化の時に__proto__にコピーされる -> は？
+
+new演算子によってコンストラクタからインスタンスを作成するとき、
+コンストラクタ関数のprototypeプロパティに格納されているオブジェクトへの参照が、
+インスタンスのプロパティ（__proto__）にコピーされる。
+
+ここまで。
+電卓する。
+
 # 24/11/13
 
 #### プライベートなプロパティ・メソッド

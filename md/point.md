@@ -72,3 +72,7 @@ j = Hoge.new;
 p j.val
 # => undefined method `val'
 ```
+
+# オブジェクト指向（よくわからん）
+* Rubyはクラスベースのオブジェクト指向。
+* JavaScriptはプロトタイプベースのオブジェクト指向。
