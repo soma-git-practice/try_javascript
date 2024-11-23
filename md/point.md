@@ -86,3 +86,8 @@ RubyよりもJavaScriptの方が分割代入を使う機会が多いからこん
 * 関数の仮引数で分割代入を使うことができる。
 
 分割代入チェックしとく。積極的に使っていくぞ。
+
+# プライベートプロパティへのアクセス
+開発者コンソールではクラス外からプライベートプロパティにアクセスすることができるため注意必要
+
+https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_properties#%E8%A7%A3%E8%AA%AC
