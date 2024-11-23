@@ -78,6 +78,9 @@ JavaScriptの人のコード読んだことないしこう書くのが正解と�
 
 https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_properties#%E8%A7%A3%E8%AA%AC
 
+電卓やりすぎたため今日は独習JavaScriptに移り、
+その後Rubyのコードリーディングをやることにするぞ。
+
 # 24/11/22 夜
 JavaScriptは分割代入でデフォルト値を設定する書き方が用意されている。
 ```javascript
