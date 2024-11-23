@@ -1,3 +1,71 @@
+# 24/11/23
+電卓作成中に起きたことを残す。
+インスタンスから静的プロパティを取得してnullであれば代入、nullでなければ実行したかった。
+
+実際のコードは使わないが起きたことを再現した。
+以下のように書き、result_functionを取得したところnullではなくundefinedが帰ってきた。
+
+```html
+<div class="hoge">Hoge</div>
+<script>
+class Hoge {
+  static result_function = null
+
+  constructor(){
+    this.hoge();
+  }
+
+  hoge(){
+    document.querySelector('.hoge').addEventListener('click', function(){
+      console.log(this.constructor.result_function);
+    })
+  }
+}
+
+new Hoge;
+// 期待
+// => null
+
+// 実際
+// => undefined
+</script>
+```
+
+これはaddEventListenerの関数コンテキスト内でのthisは要素を見ているからだった。
+https://developer.mozilla.org/ja/docs/Web/API/EventTarget/addEventListener
+
+アロー関数は関数コンテキストを作らず、親スコープのthisを探しにいくためアロー関数を使うことで解決した。
+
+```html
+<div class="hoge">Hoge</div>
+<script>
+class Hoge {
+  static result_function = null
+
+  constructor(){
+    this.hoge();
+  }
+
+  hoge(){
+    document.querySelector('.hoge').addEventListener('click', () => {
+      console.log(this.constructor.result_function);
+    })
+  }
+}
+
+new Hoge;
+// 期待
+// => null
+
+// 実際
+// => null
+</script>
+```
+
+thisの値が間違っている時にはコンテキスト毎のthisを確認することで解決に近づけるということがわかった。
+今回のコードでのデバッグでは、`.hoge`をクリックした時に発火するコールバック関数内にブレークポイントを置いてデバッグした。
+javascript難しい~~~~~
+
 # 24/11/22 夜
 JavaScriptは分割代入でデフォルト値を設定する書き方が用意されている。
 ```javascript
