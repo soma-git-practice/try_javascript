@@ -91,3 +91,14 @@ RubyよりもJavaScriptの方が分割代入を使う機会が多いからこん
 開発者コンソールではクラス外からプライベートプロパティにアクセスすることができるため注意必要
 
 https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/Private_properties#%E8%A7%A3%E8%AA%AC
+
+# スプレッド演算子で結合
+配列リテラル、オブジェクトリテラルはスプレッド演算子「...」を使うことで結合することができる。
+
+```javascript
+const a = [1, 3, 4, 5];
+console.log(['a', 'b', ...a]);
+
+const b = { a: 'a', b: 'b' };
+console.log({ c: 'c', ...b });
+```

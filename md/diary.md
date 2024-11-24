@@ -1,3 +1,195 @@
+# 24/11/24
+
+#### イテレータ
+イテレータはオブジェクトに反復処理の挙動を定義するためのオブジェクト。
+どういうことだ？？？？？
+
+イテレータオブジェクトの特徴
+* nextメソッドを持つ。
+* nextメソッドはdoneプロパティ、valueプロパティを持つオブジェクトを返す。
+* doneプロパティは繰り返し終了か途中かの印
+* valueは次の繰り返しに渡す値？（実際のサンプル触って確認するぞ）
+
+JavaScriptのオブジェクトリテラルにメソッドを書いていることに違和感を感じた。なぜならメソッドはクラスにしか書けないとなぜか勘違いしていたからだ。
+P70ちゃんと読もう。
+
+イテレータとジェネレータというJavaScriptの用語が出てきてどっちかRubyでやったことあるなと勘違いしていた。
+Rubyでやっていたのはクロージャだった。。。。JavaScriptの教材にもクロージャ登場するのかな？？
+既に登場済みだった。。。。24/11/10
+
+
+イテレータを持つオブジェクトを反復可能なオブジェクトというみたいだ。
+イテレータは特定のプロパティに設定する必要があるようだ。
+
+特定のプロパティってのが`[ Symbol.iterator ]`だ。プロパティにブラケットがついているものは初めて見た。
+これはなんだろう？？？
+
+for of文は反復可能オブジェクトに対して使用することができる。
+反復可能オブジェクトとは何かポイントを整理してみた。
+
+* `[Symbol.iterator]`というプロパティに関数を持つ
+* 持っている関数の戻り値はイテレータオブジェクト
+* イテレータオブジェクトはnextプロパティに関数を持つ
+* イテレータオブジェクトが持つ関数の戻り値は、doneプロパティとvalueプロパティを持つオブジェクトリテラル
+* doneプロパティはブーリアン型の値が入る。trueの場合繰り返し終了。falseの場合、繰り返し継続。
+* valueプロパティはfor...of文中で宣言した変数・定数の値になる。
+
+```javascript
+const iterableObj = {
+  [Symbol.iterator]: function() {
+    return {
+      next: function() {
+        return { done: ???, value: ??? }
+      }
+    }
+  }
+}
+```
+
+350ページまで読んだ。
+
+オブジェクトリテラルを反復可能オブジェクトにしようとしてみた。
+実際に動作させることができたが、正しい書き方かどうかは不明だ。
+```javascript
+const hoge = {};
+
+hoge.__proto__[Symbol.iterator] = function () {
+  let number = 0;
+  return {
+    next() {
+      if (number > 10) {
+        return { done: true }
+      } else {
+        return { done: false, value: number++ }
+      }
+    }
+  }
+}
+
+for (const value of hoge) {
+  console.log(value);
+}
+```
+
+イコール
+
+```javascript
+const hoge = {};
+
+hoge[Symbol.iterator] = function () {
+  let number = 0;
+  return {
+    next() {
+      if (number > 10) {
+        return { done: true }
+      } else {
+        return { done: false, value: number++ }
+      }
+    }
+  }
+}
+
+for (const value of hoge) {
+  console.log(value);
+}
+```
+
+イコール
+
+```javascript
+const hoge = {
+  [Symbol.iterator]: function(){
+    let number = 0;
+    return {
+      next() {
+        if (number > 10) {
+          return { done: true }
+        } else {
+          return { done: false, value: number++ }
+        }
+      }
+    }
+  }
+};
+
+for (const value of hoge) {
+  console.log(value);
+}
+```
+
+コンストラクタ関数がよくわかんないから振り返った
+
+```text
+クラスはオブジェクトリテラルを作成する雛形
+コンストラクタは初期化する時に実行される処理
+new演算子はクラスやコンストラクタ関数からインスタンスを作成するための演算子
+コンストラクタ関数内のthisはインスタンスを参照する
+
+関数オブジェクトのprototypeプロパティは関数を宣言した時に自動的に設定される。
+this.hoge = function(){}でインスタンスメソッドになる。prototypeオブジェクト内のメソッドがインスタンスメソッドというわけではない。
+prototypeを完全に理解しなくても進むことはできる。
+prototypeは継承で使うようだ。
+```
+
+JavaScriptのこの深掘りが実務につながったらいいな。。。。。。。つながらないだろうけど。。。。くらいに思っておこう。
+
+イテレータのまとめはこんな感じでいいや。
+```javascript
+const hoge = {
+  [Symbol.iterator]: function () {
+    return {
+      number: 0,
+      next: function () {
+        if (this.number >= 3)
+        { return { done: true } }
+        else
+        { return { done: false, value: this.number++ } };
+      }
+    }
+  }
+}
+
+for (const value of hoge) {
+  console.log(value);
+}
+```
+
+配列風オブジェクトも以下のような感じでうまくいくんじゃないか？
+
+```javascript
+const hoge = 配列風オブジェクト
+hoge[Symbol.iterator] = function(){
+  return {
+    next: function(){
+      { done: true, value: ??? };
+    }
+  }
+}
+
+for(const value of hoge){
+  console.log(value);
+}
+```
+
+次はジェネレータだ。
+ジェネレータ見たけどイテレータの方が好きだからコード読んで登場したら理解するくらいでいいや。
+
+#### スプレッド演算子
+スプレッド演算子は配列の結合とオブジェクトの結合に使えるようだ。
+そんなことができるなんて！！！！
+便利！
+
+```javascript
+const a = [1, 3, 4, 5];
+console.log(['a', 'b', ...a]);
+
+const b = { a: 'a', b: 'b' };
+console.log({ c: 'c', ...b });
+```
+
+12章の反復処理まで終了。
+次回は非同期処理に突入。
+
 # 24/11/23
 電卓作成中に起きたことを残す。
 インスタンスから静的プロパティを取得してnullであれば代入、nullでなければ実行したかった。
