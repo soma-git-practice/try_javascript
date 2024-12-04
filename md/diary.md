@@ -1,3 +1,99 @@
+# 24/12/04
+イベントには３つのフェーズがある。  
+キャプチャリング・ターゲット・パブリング
+
+キャプチャリングがよく分からない。
+利用者がボタンを押すと、ボタンの親タグが一番親から順番にみていきクリックイベントが親タグにも合ったらそれも動作させる。というので合ってるか？コード書いてみた。  
+合ってた。親タグのクリックイベントも動作した。  
+```html
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="">
+  </head>
+  <body>
+    <div class="parent">
+      <p class="text">親タグですよー</p>
+      <div>
+        <div>
+          <button class="child">ボタン</button>
+          <div class="counter">0</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.querySelector('body').style.backgroundColor = 'black';
+      document.querySelector('body').style.color = 'white';
+      const countIterator = {
+        count: 0,
+        next: function(){
+          return { done: false, value: ++this.count };
+        }
+      };
+      const changeColorRandom = function (event) {
+        const textElm = this.querySelector('.text');
+        const randomColor = ['aqua', 'fuchsia', 'lime', 'yellow'][Math.floor(Math.random() * 3)];
+        textElm.style.color = randomColor;
+      };
+      const countClick = function (event) {
+        const counterElm = document.querySelector(`.${this.className} + .counter`);
+        counterElm.textContent = countIterator.next().value;
+      };
+      const parentElm = document.querySelector('.parent');
+      const childElm = document.querySelector('.child');
+      parentElm.addEventListener('click', changeColorRandom);
+      childElm.addEventListener('click', countClick);
+    </script>
+  </body>
+</html>
+```
+
+子をイベントさせた時に本当に、「 親のクリックイベント -> 子のクリックイベント 」の順番で伝播しているのか試したくなった。  
+注意点としてキャプチャリングフェーズでは実行されないようだ。  
+EventListenerのオプションに { capture: true } をつけるとキャプチャリングフェーズで実行されるらしい。  
+実際に試してみたら親タグ -> 子タグに伝播しているっぽいことを確認できた。  
+```html
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="">
+  </head>
+  <body>
+    <div class="parent">
+      <p class="text">親タグですよー</p>
+      <div>
+        <div>
+          <button class="child">ボタン</button>
+          <div class="counter">0</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.querySelector('body').style.backgroundColor = 'black';
+      document.querySelector('body').style.color = 'white';
+      const countIterator = {
+        count: 0,
+        next: function(){ return { done: false, value: ++this.count }; }
+      };
+      const changeColorRandom = function (event) { console.log('親から始まる？'); };
+      const countClick = function (event) { console.log('子から始まる？'); };
+      const parentElm = document.querySelector('.parent');
+      const childElm = document.querySelector('.child');
+      parentElm.addEventListener('click', changeColorRandom, { capture: true });
+      childElm.addEventListener('click', countClick, { capture: true });
+    </script>
+  </body>
+</html>
+```
+
 # 24/12/03
 addEventListenerでイベントを登録したことはあるが、  
 removeEventListenerは使ったことがなかった。  
