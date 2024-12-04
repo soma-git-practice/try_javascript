@@ -1,3 +1,50 @@
+# 24/12/05
+キャプチャリングフェーズで実行するイベントを全て見つける  
+↓  
+ターゲットフェーズで見つけたイベント対象のイベントを発火する。
+イベント対象ってのがよく分かってなくてdomの末端ってこと？
+でも24/12/05でchildの範囲外のparentクリックしたらchildが反応しなかったから、
+末端のdomというわけではない。  
+↓  
+バブリングフェーズではアクションフェーズでイベントを実行した要素の親要素のイベントを順に発火する。  
+
+一部のイベントはバブリングしない。バブリングするかどうかはイベントオブジェクトのbubblesプロパティで判別することができるようだ。実際に確認してみるぞ！
+
+子要素のイベントオブジェクト、親要素のイベントオブジェクトのbubblesどちらを確認すればいいんだろ？  
+イコール、親に伝播しない or 子から伝播しない　どっちなんだろ？
+
+「独習JavaScript」にはmouseleaveはバブリングしないと書いてる。  
+クリックイベントとmouseleaveイベントを使って動作確認するぞ！  
+
+bubblesプロパティとstopPropagationメソッド試した。
+```html
+<div class="parent">
+  <p class="text">親タグですよー</p>
+  <div>
+    <div>
+      <button class="child">ボタン</button>
+      <div class="counter">0</div>
+    </div>
+  </div>
+</div>
+<script>
+  const parentEvent = function (event) {
+    console.log('親イベント' + event.bubbles);
+  };
+  const childEvent = function (event) {
+    event.stopPropagation();
+    console.log('子イベント' + event.bubbles);
+  };
+  const parentElm = document.querySelector('.parent');
+  const childElm = document.querySelector('.child');
+  parentElm.addEventListener('click', parentEvent);
+  childElm.addEventListener('click', childEvent);
+</script>
+```
+
+TODO  
+mouseleaveイベントの動作確認とbubblesプロパティ、「親に伝播しない or 子から伝播しない」どちらなのか確認する。  
+
 # 24/12/04
 イベントには３つのフェーズがある。  
 キャプチャリング・ターゲット・パブリング
@@ -47,7 +94,7 @@
       const childElm = document.querySelector('.child');
       parentElm.addEventListener('click', changeColorRandom);
       childElm.addEventListener('click', countClick);
-    </script>
+    </>
   </body>
 </html>
 ```
