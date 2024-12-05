@@ -1,3 +1,39 @@
+# 24/12/06
+mouseleaveイベントを動かしてbubblesプロパティ確認した。  
+ちゃんとfalseしてた。
+```javascript
+<div class="Parent"></div>
+<style>.Parent { box-sizing: border-box; width: 0; padding: 50px; background-color: aqua; }</style>
+<script>
+  const parent = document.querySelector('.Parent');
+  counter = 0;
+  parent.addEventListener('mouseleave', function(event){ this.textContent = ++counter; console.log(event.bubbles); });
+</script>
+```
+
+あれ？待てよ？昨日までの自分は子要素のclickイベントが親のmouseleaveイベントに伝播すると勘違いしてた。  
+
+だから、「親に伝播しない or 子から伝播しない」どっちなんだろ？と気になってた。  
+だけどキャプチャリングフェーズとバブリングフェーズの説明に "同じタイプ"のイベント が伝播すると書いてあった。  
+だったら親要素・子要素関係ないじゃん！
+
+メモ：  
+コンストラクタ = オブジェクトを生成する雛形 = クラスだ！  
+MDNの先頭の方に書いてある 「コンストラクター」 は、  
+Rubyリファレンスの先頭のほうに書いてある 「クラス・モジュールの継承リスト」 と近いと気づいた。
+
+Ruby | JavaScript
+-- | --
+user.class # => User | user.constructor.name // => User
+
+独習JavaScript好きだ！わかりやすい  
+
+#### stopPropagation
+* キャプチャリングフェーズでstopPropagationを呼び出すと子要素への伝播を止める。
+* ターゲットフェーズ、バブリングフェーズでstopPropagationを呼び出すと親要素への伝播を止める。
+
+TODO stopPropagationのサンプル自作と動作確認
+
 # 24/12/05
 キャプチャリングフェーズで実行するイベントを全て見つける  
 ↓  
