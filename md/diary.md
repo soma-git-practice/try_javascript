@@ -1,3 +1,30 @@
+# 24/12/07 夜
+Promiseの構文を自分でまとめてみた。
+なんとなくで使うだけなら 意外と簡単かも！？！？
+```javascript
+// promiseはチェーンするため定数ではなく変数に代入する。
+// Promiseクラスのインスタンス化の引数にはPromiseの初期時に呼び出される関数を渡す。
+// resolveには非同期処理成功時に、thenに登録された関数を呼び出す。
+// rejectには非同期処理失敗時に、catchに登録された関数を呼び出す。
+let promise = new Promise((resolve, reject) => {
+  // 非同期処理を記述
+  setTimeout(() => {
+    if(true){
+      resolve('thenに登録された関数に渡す値');
+    } else {
+      reject('catchに登録された関数に渡す値');
+    }
+  }, 1000);
+});
+
+promise = promise.then((value) => { console.log(value); });
+promise = promise.catch((value) => { console.log(value); });
+promise = promise.finally((value) => { console.log('最後に必ず呼び出す'); });
+```
+
+と思ったらPromiseチェーンに移った途端急に難しくなった。  
+Rubyで回復することに！  
+
 # 24/12/07
 stopPropagationのサンプル作る。
 stopPropagationのサンプル作ってどんな動きする確認した。
