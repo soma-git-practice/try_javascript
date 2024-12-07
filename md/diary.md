@@ -12,7 +12,35 @@ Immediate | Propagation
 "すぐに" "伝播" "止める"。  
 わー、英語知ってる人に親切な名前してるな。英語読める人が羨ましい。  
 
+泊まることを確認できた
+```javascript
+<button type="button">ボタン</button>
+<script>
+  const btn = document.querySelector('button');
+  btn.addEventListener('click', () => console.log('btn'));
+  btn.addEventListener('click', (event) => {
+    console.log('btn last');
+    event.stopImmediatePropagation();
+  });
+  btn.addEventListener('click', () => console.log('動く？') );
+</script>
+```
 
+targetとcurrentTargetは常に一致するとは限らないようだ。
+
+target ・・・ イベント発火場所  
+https://developer.mozilla.org/ja/docs/Web/API/Event/target  
+
+currentTarget ・・・ アクションが登録された場所  
+https://developer.mozilla.org/ja/docs/Web/API/Event/currentTarget  
+
+都度調べれば良さそう。
+
+すごい！！ wheelイベントで拡大縮小できるんだ！  
+https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+
+
+残るは...非同期処理
 
 ーーメモーー  
 読まずに飛ばしてたけどDOMの章も面白いかも。  
