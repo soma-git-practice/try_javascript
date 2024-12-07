@@ -1,3 +1,23 @@
+# 24/12/07
+stopPropagationのサンプル作る。
+stopPropagationのサンプル作ってどんな動きする確認した。
+そんなに使うことあるのか？ って思っているから次に進むことにした。
+
+#### stopImmediatePropagation
+
+Immediate | Propagation
+-- | --
+すぐに | 伝播
+
+"すぐに" "伝播" "止める"。  
+わー、英語知ってる人に親切な名前してるな。英語読める人が羨ましい。  
+
+
+
+ーーメモーー  
+読まずに飛ばしてたけどDOMの章も面白いかも。  
+closestメソッド便利じゃん！  
+
 # 24/12/06
 mouseleaveイベントを動かしてbubblesプロパティ確認した。  
 ちゃんとfalseしてた。

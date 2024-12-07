@@ -1,15 +1,29 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="">
-  </head>
-  <body>
-    <button>ボタン</button>
-    <div class="number"></div>
-    <script type="text/javascript" src="0.js" defer=""></script>
-  </body>
-</html>
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title></title><link rel="stylesheet" type="text/css" href=""></head><body>
+キャプチャリングフェーズでのstopPropagationの動作確認
+<div class="Parent"><button type="button" class="Child">ボタン🌞</button></div>
+
+ターゲットフェーズ・バブリングフェーズでのstopPropagationの動作確認
+<div class="Parent1"><button type="button" class="Child1">ボタン🌝</button></div>
+<script>
+  // キャプチャリングフェーズでのstopPropagationの動作確認 子要素のイベントを発火させたくない場合
+  const parent = document.querySelector('.Parent');
+  const child = document.querySelector('.Child');
+  function parentClick(event){ event.stopPropagation(); console.log(this.className); };
+  function childClick(event){ console.log(this.className); };
+  parent.addEventListener('click', parentClick, { capture: true });
+  child.addEventListener('click', childClick);
+
+  // ターゲットフェーズ・バブリングフェーズでのstopPropagationの動作確認 親要素のイベントを発火させたくない場合
+  const parent1 = document.querySelector('.Parent1');
+  const child1 = document.querySelector('.Child1');
+  function parent1Click(event){
+    console.log('Parent1 ですよー');
+  };
+  function child1Click(event){
+    event.stopPropagation();
+    console.log('Child1 ですよー');
+  };
+  parent1.addEventListener('click', parent1Click);
+  child1.addEventListener('click', child1Click);
+</script>
+</body></html>
